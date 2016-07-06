@@ -87,24 +87,21 @@
 				var HEIGHT = window.innerHeight;
 
 				scene = new THREE.Scene();
-				scene.fog = new THREE.Fog( 0x72645b, 1, 15 );
+				scene.fog = new THREE.Fog( 0x72645b, 1.0, 20 );
 
                 // camera
-				cameraTarget = new THREE.Vector3( 0, -0.25, 0 );
-
 				camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 15 );
-				// camera.position.set( 3, 0.15, 3 );
 
-                camera.position.x = 0.10;
-                camera.position.y = 0.15;
-                camera.position.z = 3.00;
 
-				camera.lookAt( cameraTarget );                
+                camera.position.x = 0.0;
+                camera.position.y = 3.0;
+                camera.position.z = 6.00;
+
                 scene.add( camera );
 
 				// Ground
 				var plane = new THREE.Mesh(
-					new THREE.PlaneBufferGeometry( 60, 60 ),
+					new THREE.PlaneBufferGeometry( 100, 100 ),
 					new THREE.MeshPhongMaterial( { color: 0x999999, specular: 0x101010 } )
 				);
 
@@ -155,7 +152,7 @@
                 controls.update();
 
 				window.addEventListener( 'resize', onWindowResize, false );
-				window.setTimeout(render);
+				window.setTimeout(render, 250);
 			}
 
 			function addShadowedLight( x, y, z, color, intensity ) {
