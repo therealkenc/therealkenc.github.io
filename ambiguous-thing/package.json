@@ -1,0 +1,19 @@
+{
+  "name": "ambiguous-thing",
+  "version": "1.0.0",
+  "description": "ambiguous 3D blender model demo",
+  "main": "Model.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blender"
+  ],
+  "author": "Ken Clark",
+  "license": "MIT",
+  "dependencies": {
+    "stats.js": "^0.16.0",
+    "three": "^0.78.0"
+  }
+}
+

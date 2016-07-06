@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Model.html",
+            "type": "chrome",
+            "request": "launch",
+            "file": "Model.html"
+        },
+        {
+            "name": "Launch localhost with sourcemaps",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000/ambiguous-thing/index.html",
+            "sourceMaps": true,
+            "webRoot": "wwwroot"
+        },
+        {
+            "name": "Attach",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222
+        }
+    ]
+}
