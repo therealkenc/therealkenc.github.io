@@ -12,36 +12,56 @@
 				overflow: hidden;
 			}
 
-			#info {
+			header {
 				color: #fff;
 				position: absolute;
-				top: 10px;
+				top: 20px;
 				width: 100%;
 				text-align: center;
-				z-index: 100;
-				display:block;
-
 			}
 
-			a { color: skyblue }
-			.button { background:#999; color:#eee; padding:0.2em 0.5em; cursor:pointer }
-			.highlight { background:orange; color:#fff; }
-
-			span {
-				display: inline-block;
-				width: 60px;
-				float: left;
-				text-align: center;
+			aside {
+				position: absolute;
+				width: 40%;  
+				top: 100px;
+				display: table-cell;
+				vertical-align: middle;
+				height: 40px;
 			}
 
+			aside label {
+				vertical-align: middle;
+			}
+
+			#objRotateSlider {
+				vertical-align: middle;  
+			}
+
+			.container {
+				position: absolute;
+				top: 0px;
+				width: 100%;
+				z-index: -1;
+			}
+
+			a { 
+				color: skyblue 
+			}
 		</style>
 	</head>
-	<body>
-		<div id="info">
+	<body>		
+		<header>
 			<a href="http://threejs.org" target="_blank">three.js</a> hack by KC -
-			STL loader by <a href="https://github.com/aleeper">aleeper</a> - 
-			Ambiguous Solid <a href="http://www.thingiverse.com/thing:1655999">thing</A> by TimLParis
-		</div>
+				STL loader by <a href="https://github.com/aleeper">aleeper</a> - 
+			Ambiguous Solid <a href="http://www.thingiverse.com/thing:1655999">thing</a> by TimLParis			
+		</header>
+
+		<aside>
+			<input id="objRotateSlider" type="range" min="-180" max="180" oninput="updateObjRotation(this.value);">
+			<label id="objRotateLabel">0</label>
+		</aside>
+
+		<div id="container" class="container"></div>
 
 		<script src="js/three.js"></script>
 		<script src="js/Mirror.js"></script>
@@ -57,16 +77,25 @@
 
 			var container, stats;
 
-			var camera, cameraTarget, scene, renderer, verticalMirror;
+			var camera, cameraTarget, scene, renderer, verticalMirror, mesh;
+
+			var rotationSlider = document.getElementById('objRotateSlider');
+			var rotationLabel = document.getElementById('objRotateLabel');
 
 			init();
+
+			function updateObjRotation(val) {
+				rotationLabel.innerText = val;
+				mesh.rotation.z = -Math.PI/4 + val * 2*Math.PI / 360;
+				render();
+			}
 
             function load() {
 				var loader = new THREE.STLLoader();
 				loader.load( 'models/ambiguous.stl', function ( geometry ) {
 					var color = new THREE.Color("#228B22");
 					var mymaterial = new THREE.MeshPhongMaterial( { color: color, specular: 0x111111, shininess: 200 } );
-					var mesh = new THREE.Mesh( geometry, mymaterial );
+					mesh = new THREE.Mesh( geometry, mymaterial );
 					mesh.rotation.x = -Math.PI/2;
 					mesh.rotation.z = -Math.PI/4;
 					mesh.position.y = -0.3;
@@ -80,7 +109,7 @@
             }
 
 			function init() {
-				container = document.createElement( 'div' );
+				container = document.getElementById('container'); //document.createElement( 'div' );
 				document.body.appendChild( container );
 
 				// scene size
